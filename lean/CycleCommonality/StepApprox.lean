@@ -20,7 +20,7 @@ Both operations preserve being constant on the cells of `P × P`, so they turn a
 step *graphon*.
 -/
 
-open MeasureTheory OddCycleBound OddCycleBound.Spectral.L2Kernel
+open MeasureTheory CycleCommonality.Foundation CycleCommonality.Foundation.Spectral.L2Kernel
 
 set_option linter.unusedSectionVars false
 

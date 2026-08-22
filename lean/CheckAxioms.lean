@@ -10,10 +10,12 @@ open CycleCommonality
 #print axioms CycleCommonality.fk_min
 #print axioms CycleCommonality.fk_mono
 #print axioms CycleCommonality.exists_critical
-#print axioms CycleCommonality.kappa_star_mul_lt_one
-#print axioms CycleCommonality.kappa_lt
+#print axioms CycleCommonality.five_fourteenths_lt_one_sub_critical
+#print axioms CycleCommonality.kappa_star_mul_one_sub_pow_lt_one
+#print axioms CycleCommonality.kappa_mul_one_sub_pow_lt_one
 #print axioms CycleCommonality.StepGraphon.tail_sum_bound
 #print axioms CycleCommonality.StepGraphon.abs_lam_le_perron
+#print axioms CycleCommonality.StepGraphon.dangerous_unique
 #print axioms CycleCommonality.StepGraphon.spectral_reduction
 #print axioms CycleCommonality.StepGraphon.lower_bound
 #print axioms CycleCommonality.twoClique.violates

@@ -1,12 +1,12 @@
 import CycleCommonality.Foundation.Graphon
 
 /-!
-# Path densities and Lemma 2.4 (integral form)
+# Path densities in integral form
 
 Building on `Graphon.lean`, we define the path homomorphism densities `x_j = t(P_j, U)` as the
-nested integral `pathDensity j = mean (kernelOpʲ 1)` and prove the **path-density formulae of Lemma 2.4**
+nested integral `pathDensity j = mean (kernelOpʲ 1)` and prove the first path-density formulae
 (`x₂ = q² + s₀`, `x₃ = q³ + 2q s₀ + s₁`, `x₄ = q⁴ + 3q² s₀ + 2q s₁ + s₀² + s₂`) entirely from
-the integral definitions, so Lemma 2.4 leaves the *trusted* list.
+the integral definitions.
 
 Engine: the key identity `kernelOp (hₖ) = sₖ·1 + h_{k+1}`, pointwise `kernelOp`-linearity, and the
 decomposition `pathIter n = xₙ·1 + (mean-zero combination of the hₖ)`, from which `xₙ` is read
@@ -18,7 +18,7 @@ open MeasureTheory
 -- A few lemmas do not use the section variable `[IsProbabilityMeasure μ]`; keep the declarations uniform.
 set_option linter.unusedSectionVars false
 
-namespace OddCycleBound
+namespace CycleCommonality.Foundation
 
 variable {Ω : Type*} [MeasurableSpace Ω] {μ : Measure Ω} [IsProbabilityMeasure μ]
 variable {U : Ω → Ω → ℝ}
@@ -170,7 +170,7 @@ lemma decomp4 (hU : IsGraphon U μ) :
   simp only [Pi.add_apply, Pi.smul_apply, smul_eq_mul]
   ring
 
-/-! ### Lemma 2.4 for `x₂, x₃, x₄` (read off by taking `mean`) -/
+/-! ### The identities for `x₂, x₃, x₄` (read off by taking `mean`) -/
 
 lemma pathDensity_two (hU : IsGraphon U μ) : pathDensity U μ 2 = edgeDensity U μ ^ 2 + specMoment U μ 0 := by
   rw [pathDensity, decomp2 hU]
@@ -202,7 +202,7 @@ lemma pathDensity_four (hU : IsGraphon U μ) :
     mean_smul, mean_smul, mean_smul, mean_compressIter hU, mean_compressIter hU, mean_compressIter hU, mean_compressIter hU]
   ring
 
-/-! ### `x₅, x₆` (needed for C₇) -/
+/-! ### Further identities for `x₅, x₆` -/
 
 /-- Abbreviation for the `Good`ness of the degree-`≤3` `hₖ`-combination in `decomp4`. -/
 private lemma good_combo4 (hU : IsGraphon U μ) :
@@ -316,4 +316,4 @@ lemma pathDensity_six (hU : IsGraphon U μ) :
     mean_compressIter hU, mean_compressIter hU, mean_compressIter hU, mean_compressIter hU, mean_compressIter hU, mean_compressIter hU]
   ring
 
-end OddCycleBound
+end CycleCommonality.Foundation

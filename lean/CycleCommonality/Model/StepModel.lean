@@ -5,8 +5,7 @@ import Mathlib.LinearAlgebra.Matrix.ToLin
 /-!
 # The weighted step-graphon model
 
-After the step-graphon reduction (`lem:step-reduction`) and the trace identity
-(`lem:trace-density`), the proof of `adjacent_cycle_commonality.tex` is pure finite
+After the step-graphon reduction and the trace identity, the remaining argument is pure finite
 symmetric-matrix theory.  This file fixes the finite model and the dictionary to the
 operator statements of `Spectral/`.
 

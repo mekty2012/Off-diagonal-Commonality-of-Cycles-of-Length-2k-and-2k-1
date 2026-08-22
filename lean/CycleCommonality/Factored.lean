@@ -20,7 +20,7 @@ Cycle densities of a step kernel are finite sums: pushing the cyclic integral of
 forward along `σ` replaces `μ^{⊗r}` by `(σ_*μ)^{⊗r}` on the finite type `ι`.
 -/
 
-open MeasureTheory OddCycleBound
+open MeasureTheory CycleCommonality.Foundation
 
 set_option linter.unusedSectionVars false
 

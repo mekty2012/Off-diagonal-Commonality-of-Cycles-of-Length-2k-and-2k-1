@@ -81,14 +81,19 @@ theorem density_odd_eq_zero {m : ℕ} (hm : Odd m) : twoClique.density m = 0 := 
   rw [StepGraphon.density, mat_eq, smul_pow, hpow, Matrix.trace_smul, trace_exch]
   simp
 
-/-- **The two-clique obstruction.**  Beyond the critical point the scaled commonality inequality
-`eq:scaled-target` fails, so `π(C_n, C_{n+1}) ⊆ (0, α*_n]`. -/
-theorem violates {n : ℕ} (hne : Even n) (hn4 : 4 ≤ n) {a c : ℝ}
-    (hc0 : 0 ≤ c) (hcrit : rho n c = twoCliqueValue n) (hca : c < a) :
-    twoClique.densityCompl n + kappa n a * twoClique.density (n + 1) < rho n a := by
-  have hodd : Odd (n + 1) := Even.add_one hne
+/-- **The two-clique obstruction.**  Beyond the critical point the scaled
+commonality inequality fails. -/
+theorem violates {n d : ℕ} (hne : Even n) (hn4 : 4 ≤ n)
+    (hd : Odd d) (hd0 : 0 < d) {a c : ℝ}
+    (hc0 : 0 ≤ c) (hcrit : rho n d c = twoCliqueValue n) (hca : c < a) :
+    twoClique.densityCompl n + kappa n d a * twoClique.density (n + d) < rho n d a := by
+  have hodd : Odd (n + d) := by
+    rcases hne with ⟨q, hq⟩
+    rcases hd with ⟨r, hr⟩
+    refine ⟨q + r, ?_⟩
+    omega
   rw [densityCompl_eq, density_odd_eq_zero hodd, mul_zero, add_zero, ← hcrit]
-  exact rho_strictMonoOn (by omega) hc0 (le_trans hc0 hca.le) hca
+  exact rho_strictMonoOn (by omega) hd0 hc0 (le_trans hc0 hca.le) hca
 
 end twoClique
 

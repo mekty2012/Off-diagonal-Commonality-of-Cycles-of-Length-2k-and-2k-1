@@ -3,8 +3,8 @@ import CycleCommonality.Spectral.EigenSystem
 /-!
 # Rank-one interlacing, without Courant–Fischer
 
-`eq:rank-one-interlace` of `adjacent_cycle_commonality.tex` states that adding a rank-one
-orthogonal projection `P` to a symmetric operator `A` interlaces the eigenvalues:
+Adding a rank-one orthogonal projection `P` to a symmetric operator `A` interlaces the
+eigenvalues:
 
 ```
   α i ≤ μ i        and        μ (i+1) ≤ α i.

@@ -17,10 +17,10 @@ kernel operations `comp`, `compPow` and `trace` are in `Foundation/Kernel.lean`.
   t(C_r, W) = ∫_{Ω^r} ∏_{i<r} W(x_i, x_{i+1}) dμ^{⊗r}        (indices cyclic),
 ```
 
-which is the definition of a homomorphism density used in `adjacent_cycle_commonality.tex`.
+which is the homomorphism-density definition used throughout this development.
 -/
 
-open MeasureTheory OddCycleBound
+open MeasureTheory CycleCommonality.Foundation
 
 set_option linter.unusedSectionVars false
 

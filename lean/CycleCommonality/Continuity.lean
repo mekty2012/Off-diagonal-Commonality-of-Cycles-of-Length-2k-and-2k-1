@@ -23,7 +23,7 @@ coordinates of a product measure.  It runs in the kernel algebra instead:
   last step is needed because the diagonal `∫ Δ(x,x)` is *not* controlled by `∫∫|Δ|`.
 -/
 
-open MeasureTheory OddCycleBound
+open MeasureTheory CycleCommonality.Foundation
 
 set_option linter.unusedSectionVars false
 

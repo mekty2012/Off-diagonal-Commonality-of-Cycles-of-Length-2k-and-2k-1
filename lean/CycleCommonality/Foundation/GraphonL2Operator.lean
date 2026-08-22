@@ -7,15 +7,10 @@ import Mathlib.Analysis.Normed.Operator.Extend
 /-!
 # L² foundations for graphon kernel operators
 
-This file starts the graphon Hilbert-space layer used by the C9 low-band
-argument.  It does not assert compactness or trace-class spectral identities.
-Instead it records the concrete L² objects already forced by the integral
-graphon definitions: bounded graphon-side functions define elements of
-`Lp ℝ 2 μ`, and the constant vector paired with the graphon degree function is
-exactly the edge density.
-
-The missing hard theorem remains the construction of the compact self-adjoint
-integral operator on `Lp ℝ 2 μ` and its countable trace/eigenvalue identities.
+This file develops the concrete `L²` objects and kernel operators needed for the graphon
+approximation argument.  In particular, bounded measurable kernels act on `Lp ℝ 2 μ`, and the
+simple-function density results yield finite-rank kernel approximations.  The development uses
+only these concrete operator identities and does not require a compact-operator spectral theorem.
 -/
 
 open MeasureTheory
@@ -27,7 +22,7 @@ set_option linter.unusedSectionVars false
 
 noncomputable section
 
-namespace OddCycleBound
+namespace CycleCommonality.Foundation
 namespace Spectral
 namespace L2Kernel
 
@@ -2919,4 +2914,4 @@ lemma kernelOpCLM_ne_zero_of_edgeDensity_pos
 
 end L2Kernel
 end Spectral
-end OddCycleBound
+end CycleCommonality.Foundation

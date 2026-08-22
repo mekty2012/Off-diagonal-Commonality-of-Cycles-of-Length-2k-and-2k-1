@@ -1,7 +1,7 @@
 -- The definitions in the statement, and the theorem.
 import CycleCommonality.Defs
 import CycleCommonality.Main
--- The scalar functions ρ_n, κ_n and the critical point.
+-- The scalar functions ρ_{n,d}, κ_{n,d} and the critical point.
 import CycleCommonality.Scalar.Rho
 import CycleCommonality.Scalar.KappaBounds
 -- Majorization and the spectral facts about the model's matrix.
@@ -29,17 +29,18 @@ import CycleCommonality.FiniteBridge
 import CycleCommonality.Graphon
 
 /-!
-# The commonality region of adjacent cycles
+# Commonality of even--odd cycle pairs
 
-The deliverable is `CycleCommonality.commonality_graphon_iff` in `Main.lean`: for even `n ≥ 4`
-and `α*_n ∈ (1/2, 1)` the unique solution of `ρ_n(α*) = 2^{1−n}`, the scaled inequality
+The deliverable is `CycleCommonality.commonality_graphon_iff` in `Main.lean`.  For even
+`n ≥ 4`, positive odd `d`, and the unique critical point
+`α* ∈ (1/2,1)` satisfying `rho n d α* = 2^{1-n}`, it proves that
 
 ```
-  t(C_n, 1−W) + κ_n(a) · t(C_{n+1}, W) ≥ ρ_n(a)
+  t(C_n, 1−W) + κ_{n,d}(a) · t(C_{n+d}, W) ≥ ρ_{n,d}(a)
 ```
 
 holds for **every** graphon `W` on **every** probability space `(Ω, μ)` if and only if
-`a ≤ α*_n`.  `README.md` says how to build and how to audit.
+`a ≤ α*`.
 
 ## Reading the statement
 

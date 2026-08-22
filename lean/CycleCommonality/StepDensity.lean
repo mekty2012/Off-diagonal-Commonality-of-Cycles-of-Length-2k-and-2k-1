@@ -15,7 +15,7 @@ is a sum, so
 which is the cycle density of the weighted step graphon with cells `σ⁻¹{i}` and matrix `M`.
 -/
 
-open MeasureTheory OddCycleBound
+open MeasureTheory CycleCommonality.Foundation
 
 set_option linter.unusedSectionVars false
 

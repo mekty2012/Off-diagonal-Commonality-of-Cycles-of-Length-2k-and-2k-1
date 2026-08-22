@@ -6,9 +6,9 @@ import Mathlib.Tactic
 /-!
 # Rayleigh bounds on spectral subspaces
 
-Mathlib has no Courant–Fischer min–max principle.  The rank-one interlacing needed by
-`adjacent_cycle_commonality.tex` does not require it: the two inequalities follow from dimension
-counting together with the elementary Rayleigh bounds proved here, namely that on the span of a
+Mathlib has no Courant–Fischer min–max principle.  The two rank-one interlacing inequalities used
+here follow from dimension counting together with the elementary Rayleigh bounds proved here,
+namely that on the span of a
 set `S` of eigenvectors the quadratic form is squeezed between the smallest and the largest
 eigenvalue indexed by `S`.
 

@@ -8,15 +8,10 @@ import Mathlib.MeasureTheory.Measure.Real
 /-!
 # Kernel-composition algebra
 
-To prove the cycle inclusion–exclusion `t(C_m, 1−U) = [polynomial in x_j and c_m]` uniformly,
-we work with kernels `K : Ω → Ω → ℝ` under composition `comp K L x y = ∫ z, K x z · L z y`.
-The all-ones kernel `onesKernel` is idempotent (`onesKernel ∘ onesKernel = onesKernel`) and rank-one, and the central
-**cut lemma** `onesKernel ∘ M ∘ onesKernel = (∫∫ M) · onesKernel` is the arc-factorization mechanism: a `onesKernel`-flanked
-run of `U`'s collapses to the scalar path density `∫∫ Uᵒˡ = x_ℓ`.
-
-This file builds the reusable algebra (composition, boundedness/measurability closure,
-bilinearity, the cut lemma).  Cyclic traces, the per-cycle expansions (C5/C7/C9), and the
-connection to `pathDensity`/`c_m` are built on top.
+For bounded measurable kernels `K : Ω → Ω → ℝ`, this file develops composition
+`comp K L x y = ∫ z, K x z · L z y`, its algebraic and measurability properties, finite
+composition powers, and cyclic traces.  These operations provide the kernel representation of
+cycle densities used throughout the graphon approximation and transfer argument.
 -/
 
 open MeasureTheory
@@ -25,7 +20,7 @@ open scoped BigOperators ENNReal symmDiff
 -- A few lemmas do not use the section variables `[IsProbabilityMeasure μ]` or `[MeasurableSpace Ω]`; keep the declarations uniform.
 set_option linter.unusedSectionVars false
 
-namespace OddCycleBound
+namespace CycleCommonality.Foundation
 
 universe u
 
@@ -1446,7 +1441,7 @@ noncomputable def trace (μ : Measure Ω) (K : Ω → Ω → ℝ) : ℝ := ∫ x
 
 lemma trace_onesKernel : trace μ (onesKernel (Ω := Ω)) = 1 := by simp [trace, onesKernel]
 
-/-- **Trace cyclic-invariance** (the necklace-rotation primitive): `trace (A ∘ B) = trace (B ∘ A)`. -/
+/-- **Trace cyclic-invariance**: `trace (A ∘ B) = trace (B ∘ A)`. -/
 lemma trace_comp_comm {A B : Ω → Ω → ℝ} (hA : GoodK A) (hB : GoodK B) :
     trace μ (comp μ A B) = trace μ (comp μ B A) := by
   obtain ⟨Ca, _, hCa⟩ := hA.bdd
@@ -1500,4 +1495,4 @@ lemma goodK_rowBroadcast {f : Ω → ℝ} (hf : Good f) : GoodK (fun _x _y => f 
   obtain ⟨C, hC0, hC⟩ := hf.bdd
   exact ⟨hf.meas.measurable.comp measurable_fst, ⟨C, hC0, fun x _ => hC x⟩⟩
 
-end OddCycleBound
+end CycleCommonality.Foundation

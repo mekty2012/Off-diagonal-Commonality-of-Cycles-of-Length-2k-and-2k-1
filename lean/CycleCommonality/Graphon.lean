@@ -15,7 +15,7 @@ With that, `Discrete.lower_bound` applies to every step graphon, and `commonalit
 carries the inequality to every graphon.
 -/
 
-open MeasureTheory OddCycleBound Finset
+open MeasureTheory CycleCommonality.Foundation Finset
 
 set_option linter.unusedSectionVars false
 
@@ -140,31 +140,36 @@ theorem exists_stepGraphon_of_isStepKernel {V : Ω → Ω → ℝ} (hV : IsGraph
         rw [heq]
       · rw [StepGraphon.densityCompl_eq_sum]
 
-/-- **The commonality theorem for graphons.**  For every graphon on every probability space, up to
-the critical point. -/
-theorem commonality_graphon {n : ℕ} (hne : Even n) (hn4 : 4 ≤ n) {a c : ℝ}
-    (hc : 1 / 2 < c) (hc1 : c < 1) (hcrit : rho n c = twoCliqueValue n) (ha0 : 0 < a)
-    (hac : a ≤ c) {W : Ω → Ω → ℝ} (hW : IsGraphon W μ) :
-    rho n a ≤ cycleDensity (cmpl W) μ n + kappa n a * cycleDensity W μ (n + 1) := by
+/-- **The commonality theorem for graphons.** -/
+theorem commonality_graphon {n d : ℕ} (hne : Even n) (hn4 : 4 ≤ n)
+    (hd : Odd d) (hd0 : 0 < d) {a c : ℝ}
+    (hc : 1 / 2 < c) (hc1 : c < 1)
+    (hcrit : rho n d c = twoCliqueValue n) (ha0 : 0 < a) (hac : a ≤ c)
+    {W : Ω → Ω → ℝ} (hW : IsGraphon W μ) :
+    rho n d a ≤ cycleDensity (cmpl W) μ n +
+      kappa n d a * cycleDensity W μ (n + d) := by
   have ha1 : a < 1 := lt_of_le_of_lt hac hc1
-  have hn0 : (0 : ℕ) < n := by omega
-  have hκ : 0 ≤ kappa n a := by
+  have hκ : 0 ≤ kappa n d a := by
     rw [kappa]
-    have h1 : (0 : ℝ) < a ^ (n - 1) := by positivity
-    have h2 : (0 : ℝ) < (1 - a) ^ n := pow_pos (by linarith) n
-    have h3 : (0 : ℝ) < (n : ℝ) := by exact_mod_cast hn0
-    positivity
-  refine commonality_of_stepKernel (by omega) hκ (fun V hV hstep => ?_) hW
+    have hnum : (0 : ℝ) ≤ (n : ℝ) * a ^ (n - 1) := by positivity
+    have hden : (0 : ℝ) < ((n + d : ℕ) : ℝ) * (1 - a) ^ (n + d - 1) := by
+      positivity
+    exact div_nonneg hnum hden.le
+  refine commonality_of_stepKernel (by omega) (by omega) hκ
+    (fun V hV hstep => ?_) hW
   obtain ⟨N, G, hG⟩ := exists_stepGraphon_of_isStepKernel hV hstep
-  obtain ⟨m, rfl⟩ : ∃ m, n = m + 1 := ⟨n - 1, by omega⟩
-  rw [(hG m).2, (hG (m + 1)).1]
+  have hcomp : cycleDensity (cmpl V) μ n = G.densityCompl n := by
+    simpa [show n - 1 + 1 = n by omega] using (hG (n - 1)).2
+  have hplain : cycleDensity V μ (n + d) = G.density (n + d) := by
+    simpa [show n + d - 1 + 1 = n + d by omega] using (hG (n + d - 1)).1
+  rw [hcomp, hplain]
   have hN : 0 < N := by
-    rcases Nat.eq_zero_or_pos N with h | h
-    · subst h
+    rcases Nat.eq_zero_or_pos N with hzero | hpos
+    · subst hzero
       have hsum := G.w_sum
       simp at hsum
-    · exact h
-  exact G.lower_bound hN hne hn4 hc hc1 hcrit ha0 hac
+    · exact hpos
+  exact G.lower_bound hN hne hn4 hd hd0 hc hc1 hcrit ha0 hac
 
 
 /-! ### The converse direction: a step graphon is a graphon -/

@@ -3,31 +3,27 @@ import Mathlib
 /-!
 # Integral-form graphon foundations
 
-This file builds the relevant objects directly from a graphon defined as an **integral**,
-over an abstract probability space — no operator model, no Hilbert space.
+This file builds the relevant objects directly from bounded measurable kernels over an abstract
+probability space.
 
-* `U : Ω → Ω → ℝ` is the (symmetric, `[0,1]`-valued) complement kernel `1 − W` (`IsGraphon`).
+* `U : Ω → Ω → ℝ` is a symmetric, `[0,1]`-valued kernel (`IsGraphon`).
 * `kernelOp U μ f x = ∫ y, U x y * f y` is the kernel form, `mean μ f = ∫ f`.
 * `degree = kernelOp 1`, `edgeDensity = mean degree`, `degCentered = degree − edgeDensity` (the mean-zero degree part).
 * `compress f = kernelOp f − mean (kernelOp f)` is the compression to the mean-zero subspace,
   `compressIter k = Aᵏ g`, and `specMoment j = ∫ g · compressIter j = ⟪g, Aʲ g⟫` are the spectral moments.
 
-The key facts proved here — **with no Hilbert space and no operator-norm theory** — are:
+The key facts proved here are:
 
 * `kernelOp_symm` — the kernel form is symmetric (Fubini + symmetry of `U`);
 * `compress_symm` — the compression is symmetric on mean-zero functions;
 * `moment` — `∫ hᵢ · hⱼ = s_{i+j}` (the moment identity for the compression iterates);
-* `sos1` — the degree-`1` sum-of-squares certificate in the `s_j` (the C₅ engine);
+* `sos1` — a degree-`1` sum-of-squares identity in the `s_j`;
 * `edge_deletion` — a representative edge-deletion bound.
-
-These are the analytic foundations discharged from the integral definition.  The degree-`2`
-SOS (for C₇) is in `MomentSOS.lean`; Lemma 2.4 in `PathDensity.lean`; the cyclic
-inclusion–exclusion in `Kernel.lean`/`Cycle.lean`/`Necklace.lean`.
 -/
 
 open MeasureTheory
 
-namespace OddCycleBound
+namespace CycleCommonality.Foundation
 
 variable {Ω : Type*} [MeasurableSpace Ω] {μ : Measure Ω} [IsProbabilityMeasure μ]
 
@@ -225,7 +221,7 @@ lemma moment (hU : IsGraphon U μ) : ∀ (j i : ℕ),
       rw [key, ih (i + 1)]
       congr 1; omega
 
-/-- **Degree-1 sum-of-squares certificate** (the C₅ engine), proved as `∫ (square) ≥ 0`. -/
+/-- **Degree-1 sum-of-squares certificate**, proved as `∫ (square) ≥ 0`. -/
 lemma sos1 (hU : IsGraphon U μ) (c1 c0 : ℝ) :
     0 ≤ c1 ^ 2 * specMoment U μ 2 + 2 * c1 * c0 * specMoment U μ 1 + c0 ^ 2 * specMoment U μ 0 := by
   have hnn : 0 ≤ ∫ x, (c1 * compressIter U μ 1 x + c0 * compressIter U μ 0 x) ^ 2 ∂μ :=
@@ -282,4 +278,4 @@ lemma edge_deletion (hU : IsGraphon U μ) :
         mul_le_mul_of_nonneg_left (hU.le_one _ _) (hU.nonneg _ _)
     _ = U p.1 p.2 := mul_one _
 
-end OddCycleBound
+end CycleCommonality.Foundation

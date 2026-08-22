@@ -3,8 +3,8 @@ import CycleCommonality.Majorization.Bump
 /-!
 # The rank-one lower majorization, in sequence form
 
-This is Lemma `lem:rank-one-majorization` of `adjacent_cycle_commonality.tex` combined with
-Karamata, stated purely about two real sequences.  No linear algebra appears yet: the spectral
+This file combines rank-one lower majorization with Karamata, stated purely about two real
+sequences.  No linear algebra appears yet: the spectral
 hypotheses (interlacing, trace shift) are taken as inputs, and `Spectral/Interlace.lean` supplies
 them.
 

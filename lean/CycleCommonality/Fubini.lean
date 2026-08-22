@@ -5,9 +5,8 @@ import Mathlib.MeasureTheory.Integral.Prod
 /-!
 # From traces to integrals
 
-`Defs.lean` defines `cycleDensity` as a trace of a kernel power.  This file proves it is the
-integral over `Ω^r` of a cyclic product, which is `lem:trace-density` of
-`adjacent_cycle_commonality.tex`.
+`Defs.lean` defines `cycleDensity` as a trace of a kernel power.  This file proves that it is the
+integral over `Ω^r` of a cyclic product.
 
 Everything runs through one statement, `trace_compList_eq_cycleIntegral`: for any list of bounded
 measurable kernels `M₀, …, M_{r−1}`,
@@ -24,7 +23,7 @@ at a time out of the product measure (`integral_pi_succ`), and a final step clos
 cycle (`cycleProd_eq_chainProd`).
 -/
 
-open MeasureTheory OddCycleBound Finset
+open MeasureTheory CycleCommonality.Foundation Finset
 
 set_option linter.unusedSectionVars false
 

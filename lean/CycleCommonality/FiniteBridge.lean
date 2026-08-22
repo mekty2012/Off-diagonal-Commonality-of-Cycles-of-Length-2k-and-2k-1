@@ -6,8 +6,8 @@ import CycleCommonality.Model.StepModel
 
 `StepDensity.lean` writes the cycle density of a step kernel as a sum over closed walks in the
 cells.  `Model/StepModel.lean` defines the density of a weighted step graphon as `Tr(Tʳ)` with
-`T i j = U i j √(wᵢ) √(wⱼ)`.  This file identifies the two, which is what lets the finite theorem
-`Main.commonality_iff` be applied to the approximants produced by `Factored.lean`.
+`T i j = U i j √(wᵢ) √(wⱼ)`.  This file identifies the two, which lets the finite commonality
+theorem be applied to the approximants produced by `Factored.lean`.
 
 Two steps:
 
@@ -18,7 +18,7 @@ Two steps:
 * the telescoping `∏ᵢ √(w(uᵢ))·√(w(u_{i+1})) = ∏ᵢ w(uᵢ)`, by reindexing along the cyclic shift.
 -/
 
-open MeasureTheory OddCycleBound Finset
+open MeasureTheory CycleCommonality.Foundation Finset
 
 set_option linter.unusedSectionVars false
 

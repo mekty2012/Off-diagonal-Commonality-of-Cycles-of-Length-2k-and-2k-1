@@ -3,10 +3,9 @@ import CycleCommonality.Majorization.Karamata
 /-!
 # Inserting one value into a nonincreasing sequence
 
-Lemma `lem:rank-one-majorization` of `adjacent_cycle_commonality.tex` applies Karamata to the
-vector `v = (α₀, …, α_{N-2}, α_{N-1} + 1)`, which is **not** sorted — see point (2) of the audit.
-The paper handles this with the "sum of the `j` largest = max over `j`-element subsets"
-characterization.
+The rank-one majorization argument applies Karamata to the vector
+`v = (α₀, …, α_{N-2}, α_{N-1} + 1)`, which is **not** sorted.  The proof handles this with the
+"sum of the `j` largest = max over `j`-element subsets" characterization.
 
 Formalizing that characterization needs a chunk of sorting theory.  It is avoided here: since `v`
 is `α` (truncated) with a single extra value `w` inserted, its nonincreasing rearrangement can be

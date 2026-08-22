@@ -7,14 +7,12 @@ import Mathlib.Tactic
 /-!
 # Karamata's inequality for even powers
 
-Mathlib has no majorization order and no Karamata inequality, so we build the special case the
-proof of `adjacent_cycle_commonality.tex` needs: the convex function is `x ↦ x ^ n` with `n`
-**even**, hence convex on all of `ℝ` — see point (3) of the audit, the inequality is false if one
-only has convexity on `[0, ∞)`.
+Mathlib has no majorization order and no Karamata inequality, so we build the required special
+case: the convex function is `x ↦ x ^ n` with `n` **even**, hence convex on all of `ℝ`.  The
+inequality would be false if one only had convexity on `[0, ∞)`.
 
 Everything is indexed by `ℕ` and summed over `Finset.range N`, which keeps the induction in
-`abel_sum_eq` clean.  `Fin`-indexed data (Mathlib's `eigenvalues`) is transported in
-`Majorization/Defs.lean`.
+`abel_sum_eq` clean.  Finite eigensystems are converted to this representation at the call sites.
 
 Main results:
 

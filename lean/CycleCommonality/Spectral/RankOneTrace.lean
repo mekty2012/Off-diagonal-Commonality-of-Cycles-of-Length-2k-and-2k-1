@@ -4,7 +4,7 @@ import CycleCommonality.Majorization.RankOne
 /-!
 # Corollary `cor:rank-one-trace`: the even trace under subtraction of a rank-one projection
 
-This is `eq:rank-one-trace-bound` of `adjacent_cycle_commonality.tex`:
+This file proves the following rank-one trace bound:
 
 ```
   Tr (P - T) ^ n  ≥  (1 - λ₀) ^ n + ∑_{i ≠ 0} |λ i| ^ n            (n even),

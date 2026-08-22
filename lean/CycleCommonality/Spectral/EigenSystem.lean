@@ -7,8 +7,8 @@ An `EigenSystem N T` packages an orthonormal basis of eigenvectors of `T` togeth
 corresponding eigenvalues, listed in nonincreasing order.  Mathlib's
 `hT.eigenvectorBasis`/`hT.eigenvalues` provide one (`EigenSystem.ofSymmetric`).
 
-The reason for the abstraction: the proof in `adjacent_cycle_commonality.tex` applies its
-majorization lemma to `A = -T`, and the eigenvalues of `-T` are the negated, *reversed*
+The abstraction makes it convenient to apply majorization to `A = -T`, whose eigenvalues are the
+negated, *reversed*
 eigenvalues of `T`.  Identifying `(-T).eigenvalues` with `fun i => -(T.eigenvalues i.rev)` would
 need a uniqueness theorem for sorted eigenvalue lists, which Mathlib does not have.  With an
 eigensystem the passage to `-T` is one line: reverse the basis and negate (`EigenSystem.neg`).
